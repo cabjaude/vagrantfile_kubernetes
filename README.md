@@ -1,6 +1,9 @@
-# Procedimento de Instalção Nó Master Kubernetes
+# Procedimento de Instalção Nó Master e Worker Kubernetes
+
+Instalar nó master
 
 apt-get update && apt-get upgrade -y
+
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
@@ -41,10 +44,12 @@ systemctl restart docker
 
 apt-get install -y apt-transport-https ca-certificates curl
 
-                                    curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
-                                    apt-get update && apt-get install kubeadm=1.21.0-00 kubelet=1.21.0-00 -y
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/
+sources.list.d/kubernetes.list
+
+apt-get update && apt-get install kubeadm=1.21.0-00 kubelet=1.21.0-00 -y
 
 kubeadm config images pull --kubernetes-version=1.21.0
 
@@ -64,7 +69,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 kubeadm token create --print-join-command
 
-# Procedimento de Instalção Nó worker Kubernetes
+Instalar nó worker
 
 apt-get update && apt-get install ca-certificates curl gnupg lsb-release -y
 
@@ -96,5 +101,9 @@ curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.
 
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-  apt-get update && apt-get install kubeadm=1.21.0-00 kubelet=1.21.0-00 -y
+apt-get update && apt-get install kubeadm=1.21.0-00 kubelet=1.21.0-00 -y
+
+
+
+
 
