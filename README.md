@@ -1,6 +1,6 @@
 # Procedimento de Instalção Nó Master e Worker Kubernetes
 
-Instalar nó master
+**Instalar nó master**
 
 apt-get update && apt-get upgrade -y
 
@@ -69,7 +69,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 kubeadm token create --print-join-command
 
-Instalar nó worker
+**Instalar nó worker**
 
 apt-get update && apt-get install ca-certificates curl gnupg lsb-release -y
 
