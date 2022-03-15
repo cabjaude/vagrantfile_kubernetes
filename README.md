@@ -1,4 +1,4 @@
-# Procedimento de Instalção Nó Master e Worker Kubernetes
+# Procedimento de Instalação Nó Master e Worker Kubernetes
 
 **Instalar nó master**
 
