@@ -68,7 +68,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 kubeadm token create --print-join-command
 
-=================================================================================================================
+=================================================================================================
 
 **Instalar nó worker**
 
