@@ -58,8 +58,9 @@ Conhecimentos básico de Kubernetes
 
 <ol>
   <li>Reload config modules</li> 
+
           sysctl --system
-  
+          
   <li>Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
   
           sudo apt-get update
