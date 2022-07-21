@@ -41,11 +41,11 @@ Conhecimentos básico de Kubernetes
 
 #### Master k8s VM Configure
 <ol>
-<li>1. Update apt package list and upgrade.</li>
+<li> Update apt package list and upgrade.</li>
 
         apt-get update && apt-get upgrade -y
 
-<li>2. Load the config modules of daemon k8s.</li>
+<li> Load the config modules of daemon k8s.</li>
   
         cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
         br_netfilter
@@ -56,11 +56,11 @@ Conhecimentos básico de Kubernetes
         net.bridge.bridge-nf-call-iptables = 1
         EOF
 
-<ol><li> 2.1. Reload config modules</li></ol>  
+<ol><li>Reload config modules</li></ol>  
   
         sysctl --system
 
-<li>3. Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
+<li>Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
 
         sudo apt-get update
 
@@ -70,19 +70,19 @@ Conhecimentos básico de Kubernetes
            gnupg \
            lsb-release
 
-<li>4. Add Docker’s official GPG key:</li>
+<li>Add Docker’s official GPG key:</li>
 
  sudo mkdir -p /etc/apt/keyrings
 
  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg  (Necessary user root)
 
-<li>5. Use the following command to set up the repository:</li>
+<li>Use the following command to set up the repository:</li>
 
      echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-<li>6. Install Docker Engine</li>
+<li>Install Docker Engine</li>
 
     Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
@@ -97,7 +97,7 @@ Conhecimentos básico de Kubernetes
       sudo chmod a+r /etc/apt/keyrings/docker.gpg.
 
 
-<li>7. Configure Docker daemon in systemd</li>
+<li>Configure Docker daemon in systemd</li>
 
   cat > /etc/docker/daemon.json <<EOF
   {
@@ -110,19 +110,19 @@ Conhecimentos básico de Kubernetes
   }
   EOF
 
- <ol><li>7.1. Enable docker init statup with OS</li>
+ <ol><li>Enable docker init statup with OS</li>
 
    systemctl enable docker<li>
 
- <li>7.2. Reload daemon<li>
+ <li>Reload daemon<li>
 
   systemctl daemon-reload<li>
 
- <li>7.3. Restart docker<li>
+ <li>Restart docker<li>
 
   systemctl restart docker<li>
 
- <li>7.4. Desabilitar o Swap<li>
+ <li>Desabilitar o Swap<li>
 </ol>
   swapoff -a
   vim /etc/fstab (comentar a linha do swap)
@@ -138,35 +138,35 @@ Conhecimentos básico de Kubernetes
 
     kubectl: the command line util to talk to your cluster.
 
-<ol><li>1. Update the apt package index and install packages needed to use the Kubernetes apt repository:</li>
+<ol><li>Update the apt package index and install packages needed to use the Kubernetes apt repository:</li>
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
-<li>2. Download the Google Cloud public signing key:</li>
+<li>Download the Google Cloud public signing key:</li>
 
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
-<li>3. Add the Kubernetes apt repository:</li>
+<li>Add the Kubernetes apt repository:</li>
 
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-<li>4. Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:</li>
+<li>Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:</li>
 
 sudo apt-get update
 sudo apt-get update && apt-get install kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00 -y
 
-<li>5. Check if you installed it correctly with these commands:</li>
+<li>Check if you installed it correctly with these commands:</li>
 
 kubeadm version
 kubelet --version
 kubectl version
 
-<li>6. Download images container cluster.</li>
+<li>Download images container cluster.</li>
 
 kubeadm config images pull --kubernetes-version=1.21.0
 
-<li>7. Init Cluster</li>
+<li>Init Cluster</li>
 
 kubeadm init --kubernetes-version=1.21.0
 
@@ -174,13 +174,13 @@ If everything went well you will receive the message below
 
 Your Kubernetes control-plane has initialized successfully! 
 
-<li>8. To start using your cluster, you need to run the following as a regular user:</li>
+<li>To start using your cluster, you need to run the following as a regular user:</li>
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-<li>9. Enable CNI With plugin Weave Net</li>
+<li>Enable CNI With plugin Weave Net</li>
 
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
@@ -191,7 +191,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 Set up the repository
 
-<li>1. Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
+<li>Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
 
  sudo apt-get update
 
@@ -201,19 +201,19 @@ Set up the repository
     gnupg \
     lsb-release
 
-<li>2. Add Docker’s official GPG key:</li>
+<li>Add Docker’s official GPG key:</li>
 
  sudo mkdir -p /etc/apt/keyrings
 
  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg  (Necessary user root)
 
-<li>3. Use the following command to set up the repository:</li>
+<li>Use the following command to set up the repository:</li>
 
      echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-<li>4. Install Docker Engine</li>
+<li>Install Docker Engine</li>
 
     Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
@@ -227,7 +227,7 @@ Set up the repository
     
       sudo chmod a+r /etc/apt/keyrings/docker.gpg.
 
-<li>5. Configure the Docker daemon in systemd</li>
+<li>Configure the Docker daemon in systemd</li>
 
       cat > /etc/docker/daemon.json <<EOF
       {
@@ -240,18 +240,18 @@ Set up the repository
       }
       EOF
 
- <ol><li>5.1. Enable docker init statup with OS</li></ol>
+ <ol><li>Enable docker init statup with OS</li></ol>
    systemctl enable docker
 
- <li>5.2. Reload daemon</li>
+ <li>Reload daemon</li>
 
    systemctl daemon-reload
 
- <li>5.3. Restart docker</li>
+ <li>Restart docker</li>
 
    systemctl restart docker
  
-<li>6. Installing kubeadm and kubelet</li>
+<li>Installing kubeadm and kubelet</li>
 
   Update the apt package index and install packages needed to use the Kubernetes apt repository:
 
@@ -272,13 +272,13 @@ Set up the repository
     sudo apt-get install -y kubeadm=1.21.1-00 kubelet=1.21.1-00
     sudo kubeadm version && kubelet --version
  
-<li>7. Disable swap</li>
+<li>Disable swap</li>
 
     swapoff -a
     vim /etc/fstab 
     (comentar a linha do swap)
 
-<li>8. Rename instance</li>
+<li>Rename instance</li>
 
     vim /etc/hosts
 
