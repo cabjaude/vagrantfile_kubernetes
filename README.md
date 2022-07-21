@@ -56,7 +56,7 @@ Conhecimentos básico de Kubernetes
         net.bridge.bridge-nf-call-iptables = 1
         EOF
 
-<ol><li>Reload config modules</li></ol>  
+<ol><li>Reload config modules</li> 
   
         sysctl --system
 
@@ -82,7 +82,7 @@ Conhecimentos básico de Kubernetes
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-<li>Install Docker Engine</li>
+<li>Install Docker Engine</li></ol> 
 
     Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
@@ -99,16 +99,16 @@ Conhecimentos básico de Kubernetes
 
 <li>Configure Docker daemon in systemd</li>
 
-  cat > /etc/docker/daemon.json <<EOF
-  {
-    "exec-opts": ["native.cgroupdriver=systemd"],
-    "log-driver": "json-file",
-    "log-opts": {
-      "max-size": "100m"
-    },
-    "storage-driver": "overlay2"
-  }
-  EOF
+      cat > /etc/docker/daemon.json <<EOF
+      {
+        "exec-opts": ["native.cgroupdriver=systemd"],
+        "log-driver": "json-file",
+        "log-opts": {
+          "max-size": "100m"
+        },
+        "storage-driver": "overlay2"
+      }
+      EOF
 
  <ol>
  
@@ -133,7 +133,7 @@ Conhecimentos básico de Kubernetes
 
 # Installing kubeadm, kubelet and kubectl 
 
-**You will install these packages on all of your machines:**
+## You will install these packages on all of your machines: 
 
     kubeadm: the command to bootstrap the cluster.
 
