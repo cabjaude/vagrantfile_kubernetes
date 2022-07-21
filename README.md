@@ -62,13 +62,13 @@ Conhecimentos básico de Kubernetes
 
 3. Update the apt package index and install packages to allow apt to use a repository over HTTPS:
 
- sudo apt-get update
+        sudo apt-get update
 
- sudo apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+        sudo apt-get install -y \
+           ca-certificates \
+           curl \
+           gnupg \
+           lsb-release
 
 4. Add Docker’s official GPG key:
 
