@@ -114,17 +114,17 @@ Conhecimentos básico de Kubernetes
  
  <li>Enable docker init statup with OS</li>
 
-   systemctl enable docker<li>
+   systemctl enable docker</li>
 
- <li>Reload daemon<li>
+ <li>Reload daemon</li>
 
    systemctl daemon-reload
 
- <li>Restart docker<li>
+ <li>Restart docker</li>
 
   systemctl restart docker
 
- <li>Desabilitar o Swap<li>
+ <li>Desabilitar o Swap</li>
 
   swapoff -a
   vim /etc/fstab (comentar a linha do swap)
