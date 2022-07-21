@@ -45,22 +45,23 @@ Conhecimentos básico de Kubernetes
 
         apt-get update && apt-get upgrade -y
 
-<li> Load the config modules of daemon k8s.</li>
-  
+<li> Load the config modules of daemon k8s.
+<ol> 
         cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
         br_netfilter
         EOF
-     
+    
         cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
         net.bridge.bridge-nf-call-ip6tables = 1
         net.bridge.bridge-nf-call-iptables = 1
         EOF
 
-<ol>
-  <li>Reload config modules</li> 
+
+  <li>Reload config modules</li>
 
           sysctl --system
-
+          
+  
   <li>Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
   
           sudo apt-get update
@@ -84,6 +85,7 @@ Conhecimentos básico de Kubernetes
         $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   
   <li>Install Docker Engine</li>
+  </li>
 </ol> 
 </ol>
     Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
