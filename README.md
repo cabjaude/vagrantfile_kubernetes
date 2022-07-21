@@ -45,8 +45,8 @@ Conhecimentos básico de Kubernetes
 
         apt-get update && apt-get upgrade -y
 
-<li> Load the config modules of daemon k8s.
-<ol> 
+<li> Load the config modules of daemon k8s.</li>
+ 
         cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
         br_netfilter
         EOF
@@ -56,38 +56,35 @@ Conhecimentos básico de Kubernetes
         net.bridge.bridge-nf-call-iptables = 1
         EOF
 
+<ul>
+<li>Reload config modules</li>
+ 
+        sysctl --system
+        
+<li> Update the apt package index and install packages to allow apt to use a repository over HTTPS: </li>
+        
+        sudo apt-get update
+        sudo apt-get install -y \
+           ca-certificates \
+           curl \
+           gnupg \
+           lsb-release
+        
+<li>Add Docker’s official GPG key:</li>
 
-  <li>Reload config modules</li>
+ sudo mkdir -p /etc/apt/keyrings
 
-          sysctl --system
-          
-  
-  <li>Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
-  
-          sudo apt-get update
-  
-          sudo apt-get install -y \
-             ca-certificates \
-             curl \
-             gnupg \
-             lsb-release
-  
-  <li>Add Docker’s official GPG key:</li>
-  
-   sudo mkdir -p /etc/apt/keyrings
-  
-   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg  (Necessary user root)
-  
-  <li>Use the following command to set up the repository:</li>
-  
-       echo \
-        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  
-  <li>Install Docker Engine</li>
-  </li>
-</ol> 
-</ol>
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg  (Necessary user root)
+
+<li>Use the following command to set up the repository:</li>
+
+     echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+<li>Install Docker Engine</li>
+</li> 
+</ul>
     Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
       sudo apt-get update
@@ -133,6 +130,7 @@ Conhecimentos básico de Kubernetes
   swapoff -a
   vim /etc/fstab (comentar a linha do swap)
 
+</ol>
 </ol>
 
 # Installing kubeadm, kubelet and kubectl 
