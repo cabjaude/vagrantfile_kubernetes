@@ -60,7 +60,7 @@ Conhecimentos básico de Kubernetes
   <li>Reload config modules</li> 
 
           sysctl --system
-          
+
   <li>Update the apt package index and install packages to allow apt to use a repository over HTTPS:</li>
   
           sudo apt-get update
@@ -85,7 +85,7 @@ Conhecimentos básico de Kubernetes
   
   <li>Install Docker Engine</li>
 </ol> 
-
+</ol>
     Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
       sudo apt-get update
