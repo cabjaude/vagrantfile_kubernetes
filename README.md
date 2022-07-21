@@ -110,23 +110,26 @@ Conhecimentos básico de Kubernetes
   }
   EOF
 
- <ol><li>Enable docker init statup with OS</li>
+ <ol>
+ 
+ <li>Enable docker init statup with OS</li>
 
    systemctl enable docker<li>
 
  <li>Reload daemon<li>
 
-  systemctl daemon-reload<li>
+   systemctl daemon-reload
 
  <li>Restart docker<li>
 
-  systemctl restart docker<li>
+  systemctl restart docker
 
  <li>Desabilitar o Swap<li>
-</ol>
+
   swapoff -a
   vim /etc/fstab (comentar a linha do swap)
 
+</ol>
 
 # Installing kubeadm, kubelet and kubectl 
 
