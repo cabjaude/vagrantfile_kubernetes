@@ -43,7 +43,9 @@ Conhecimentos básico de Kubernetes
 <ol>
 <li> Update apt package list and upgrade.</li>
 
-        apt-get update && apt-get upgrade -y
+```console
+apt-get update && apt-get upgrade -y
+```
 
 <li> Load the config modules of daemon k8s.</li>
  
