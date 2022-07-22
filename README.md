@@ -33,7 +33,9 @@ Provision a Kubernetes Cluster with Vagrant in VirtualBox for Study Lab.
 
 Before starting, you will need to have the following tools installed on your machine:
 
-[Git](https://git-scm.com) e [VSCode](https://code.visualstudio.com/).
+[Git](https://git-scm.com)
+[VSCode](https://code.visualstudio.com/)
+[Vagrant](https://www.vagrantup.com/downloads)
 
 Knowledge in Linux Environments
 
