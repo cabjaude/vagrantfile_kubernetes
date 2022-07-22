@@ -49,28 +49,34 @@ apt-get update && apt-get upgrade -y
 
 <li> Load the config modules of daemon k8s.</li>
  
-        cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-        br_netfilter
-        EOF
-    
-        cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-        net.bridge.bridge-nf-call-ip6tables = 1
-        net.bridge.bridge-nf-call-iptables = 1
-        EOF
+ ```console
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
 
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+```
 <ul>
+
 <li>Reload config modules</li>
- 
-        sysctl --system
-        
+
+ ```console
+sysctl --system
+```    
 <li> Update the apt package index and install packages to allow apt to use a repository over HTTPS: </li>
-        
-        sudo apt-get update
-        sudo apt-get install -y \
-           ca-certificates \
-           curl \
-           gnupg \
-           lsb-release
+
+ ```console
+sudo apt-get update
+sudo apt-get install -y \
+   ca-certificates \
+   curl \
+   gnupg \
+   lsb-release
+```          
+
         
 <li>Add Docker’s official GPG key:</li>
 
