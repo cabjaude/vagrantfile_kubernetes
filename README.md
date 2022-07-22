@@ -35,7 +35,7 @@ Before starting, you will need to have the following tools installed on your mac
 
 [Git](https://git-scm.com) e [VSCode](https://code.visualstudio.com/).
 
-<img height="32" width="32" src="https://unpkg.com/simple-icons@v7/icons/archlinux.svg.svg" /> Knowledge in Linux Environments<p>
+Knowledge in Linux Environments
 
 Knowledge in Linux Vagrant<p>
 
