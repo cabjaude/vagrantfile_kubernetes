@@ -14,7 +14,11 @@
 
 ## 💻 About this project
 
-Provision a Kubernetes Cluster with Vagrant in VirtualBox for Study Lab.
+In this Kubernetes tutorial, I have covered the step-by-step guide to setup Kubernetes cluster on Vagrant. It is a multinode kubernetes setup using kubeadm.
+
+Vagrant is a great utility to set up Virtual machines on your local workstation. I pretty much use vagrant for most of my testing and learning purposes. If you are new to Vagrant, see my beginners vagrant guide
+
+This guide primarily focuses on the Kubernetes automated setup using Vagrantfile and shell scripts. I have created this as part of my Certified Kubernetes Security Specialist exam guide with cluster version 1.21.1
 
 ![Tux, the Linux mascot](/assets/images/tux.png)
 
