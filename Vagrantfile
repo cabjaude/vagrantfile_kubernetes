@@ -1,41 +1,41 @@
-
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-MASTER_IP       = "192.168.1.10"
-NODE_01_IP      = "192.168.1.11"
-NODE_02_IP      = "192.168.1.12"
+NUM_WORKER_NODES=2 #quantidade de workers
+IP_NW="192.168.0." #rede local a ser utilizada.
+IP_START=2 #octeto inicio o qual dara a sequecia do bloco de rede que será implementado no Master o primeiro da sequencia.
 
 Vagrant.configure("2") do |config|
+  config.vm.provision "shell", env: {"IP_NW" => IP_NW, "IP_START" => IP_START}, inline: <<-SHELL
+      apt-get update -y
+      echo "$IP_NW$((IP_START)) master-node" >> /etc/hosts
+      echo "$IP_NW$((IP_START+1)) worker-node01" >> /etc/hosts
+      echo "$IP_NW$((IP_START+2)) worker-node02" >> /etc/hosts
+  SHELL
+
   config.vm.box = "ubuntu/focal64"
-  config.vm.box_version = "20220804.0.0"
+  config.vm.box_check_update = true
 
-  boxes = [
-    { :name => "master",  :ip => MASTER_IP,  :cpus => 1, :memory => 2048 },
-    { :name => "node-01", :ip => NODE_01_IP, :cpus => 2, :memory => 2048 },
-    { :name => "node-02", :ip => NODE_02_IP, :cpus => 2, :memory => 2048 },
-  ]
-
-  boxes.each do |opts|
-    config.vm.define opts[:name] do |box|
-      box.vm.hostname = opts[:name]
-      box.vm.network "public_network", bridge: "enp3s0", ip: opts[:ip]
- 
-      box.vm.provider "virtualbox" do |vb|
-        vb.cpus = opts[:cpus]
-        vb.memory = opts[:memory]
-      end
-      box.vm.provision "shell", path:"./install-kubernetes-dependencies.sh"
-      if box.vm.hostname == "master" then 
-        box.vm.provision "shell", path:"./configure-master-node.sh"
-        end
-      if box.vm.hostname == "node-01" then ##TODO: create some regex to match worker hostnames
-        box.vm.provision "shell", path:"./configure-worker-nodes.sh"
-      end
-      if box.vm.hostname == "node-02" then ##TODO: create some regex to match worker hostnames
-        box.vm.provision "shell", path:"./configure-worker-nodes.sh"
-      end
-      
+  config.vm.define "master" do |master|   
+    master.vm.hostname = "master-node"
+    master.vm.network "public_network", bridge: "wlp4s0" , ip: IP_NW + "#{IP_START}" #wlp4s0 interface da rede
+    master.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = 2
     end
+    master.vm.provision "shell", path: "scripts/common.sh"
+    master.vm.provision "shell", path: "scripts/master.sh"
   end
-end
+
+  (1..NUM_WORKER_NODES).each do |i|
+
+  config.vm.define "node0#{i}" do |node|
+    node.vm.hostname = "worker-node0#{i}"
+    node.vm.network "public_network",  bridge: "wlp4s0" , ip: IP_NW + "#{IP_START + i}" #wlp4s0 interface da rede
+    node.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = 2
+    end
+    node.vm.provision "shell", path: "scripts/common.sh"
+    node.vm.provision "shell", path: "scripts/node.sh"
+  end
+
+  end
+end 
